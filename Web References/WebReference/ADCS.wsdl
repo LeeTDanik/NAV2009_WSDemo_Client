@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/ADCS" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/ADCS" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/ADCS" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ProcessDocument">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="document" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ProcessDocument_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="document" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="ProcessDocument">
+    <part name="parameters" element="tns:ProcessDocument" />
+  </message>
+  <message name="ProcessDocument_Result">
+    <part name="parameters" element="tns:ProcessDocument_Result" />
+  </message>
+  <portType name="ADCS_Port">
+    <operation name="ProcessDocument">
+      <input name="ProcessDocument" message="tns:ProcessDocument" />
+      <output name="ProcessDocument_Result" message="tns:ProcessDocument_Result" />
+    </operation>
+  </portType>
+  <binding name="ADCS_Binding" type="tns:ADCS_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="ProcessDocument">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/ADCS:ProcessDocument" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ProcessDocument">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ProcessDocument_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ADCS">
+    <port name="ADCS_Port" binding="tns:ADCS_Binding">
+      <address location="http://192.168.88.124:7047/DynamicsNAV/WS/CRONUS/Codeunit/ADCS" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
